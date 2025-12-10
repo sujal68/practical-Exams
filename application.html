@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Development - Units 1-5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .accordion {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
+        }
+
+        .accordion-header.active {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 0;
+            background: white;
+        }
+
+        .accordion-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 2000px;
+            }
+        }
+
+        .code-section {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .code-section:last-child {
+            border-bottom: none;
+        }
+
+        .code-title {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4CAF50;
+        }
+
+        .code-block {
+            position: relative;
+            background: #2d2d2d;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .copy-btn:hover {
+            background: #45a049;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            margin: 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .description {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            margin-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 Android Development - Units 1-5</h1>
+            <p>Complete MAD practicals for BCA Semester 3</p>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">Web Design</a>
+            <a href="python.html">Python</a>
+            <a href="data-structure.html">Data Structure</a>
+        </div>
+
+        <!-- Unit 1: Introduction to Android -->
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>📚 Unit 1: Introduction to Android</span>
+                <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-content">
+                <div class="code-section">
+                    <div class="code-title">1. Hello World App</div>
+                    <div class="description">Basic Android app with TextView</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit1code1')">Copy</button>
+                        <pre id="unit1code1">// MainActivity.java
+package com.example.helloworld;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        TextView textView = findViewById(R.id.textView);
+        textView.setText("Hello World from Android!");
+    }
+}</pre>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <div class="code-title">2. Activity Lifecycle Demo</div>
+                    <div class="description">Demonstrates all lifecycle methods</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit1code2')">Copy</button>
+                        <pre id="unit1code2">// MainActivity.java
+package com.example.lifecycle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "LifecycleDemo";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate() called");
+        Toast.makeText(this, "onCreate() called", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+        Toast.makeText(this, "onStart() called", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+        Toast.makeText(this, "onResume() called", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause() called");
+        Toast.makeText(this, "onPause() called", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart() called");
+        Toast.makeText(this, "onRestart() called", Toast.LENGTH_SHORT).show();
+    }
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 2: UI Components -->
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🎨 Unit 2: UI Components & Layouts</span>
+                <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-content">
+                <div class="code-section">
+                    <div class="code-title">3. Linear Layout Example</div>
+                    <div class="description">Vertical and horizontal linear layouts</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit2code1')">Copy</button>
+                        <pre id="unit2code1">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"&gt;
+
+    &lt;TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Linear Layout Demo"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp" /&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"&gt;
+
+        &lt;Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Button 1"
+            android:layout_marginEnd="8dp" /&gt;
+
+        &lt;Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Button 2"
+            android:layout_marginStart="8dp" /&gt;
+
+    &lt;/LinearLayout&gt;
+
+    &lt;EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:layout_marginBottom="16dp" /&gt;
+
+    &lt;Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit" /&gt;
+
+&lt;/LinearLayout&gt;</pre>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <div class="code-title">4. Relative Layout Example</div>
+                    <div class="description">Positioning elements relative to each other</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit2code2')">Copy</button>
+                        <pre id="unit2code2">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"&gt;
+
+    &lt;TextView
+        android:id="@+id/headerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Header"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp" /&gt;
+
+    &lt;Button
+        android:id="@+id/centerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Center Button"
+        android:layout_centerInParent="true" /&gt;
+
+    &lt;EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text"
+        android:layout_above="@id/centerButton"
+        android:layout_marginBottom="20dp" /&gt;
+
+    &lt;TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Footer"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp" /&gt;
+
+&lt;/RelativeLayout&gt;</pre>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <div class="code-title">5. Button Click Events</div>
+                    <div class="description">Handling button clicks and events</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit2code3')">Copy</button>
+                        <pre id="unit2code3">// MainActivity.java
+package com.example.buttonevents;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    private Button button1, button2, button3;
+    private TextView resultText;
+    private int clickCount = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        button3 = findViewById(R.id.button3);
+        resultText = findViewById(R.id.resultText);
+        
+        // Method 1: Anonymous inner class
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount++;
+                resultText.setText("Button 1 clicked " + clickCount + " times");
+                Toast.makeText(MainActivity.this, "Button 1 clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
+        // Method 2: Lambda expression
+        button2.setOnClickListener(v -> {
+            resultText.setText("Button 2 clicked using Lambda!");
+            Toast.makeText(this, "Lambda click!", Toast.LENGTH_SHORT).show();
+        });
+        
+        // Method 3: Method reference
+        button3.setOnClickListener(this::onButton3Click);
+    }
+    
+    public void onButton3Click(View view) {
+        resultText.setText("Button 3 clicked using method reference!");
+        Toast.makeText(this, "Method reference click!", Toast.LENGTH_SHORT).show();
+    }
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 3: Advanced UI -->
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>📝 Unit 3: Forms & Input Controls</span>
+                <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-content">
+                <div class="code-section">
+                    <div class="code-title">6. Registration Form</div>
+                    <div class="description">Complete form with validation</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit3code1')">Copy</button>
+                        <pre id="unit3code1">// MainActivity.java
+package com.example.registrationform;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+
+public class MainActivity extends AppCompatActivity {
+    private EditText nameEdit, emailEdit, phoneEdit, passwordEdit;
+    private RadioGroup genderGroup;
+    private CheckBox termsCheck;
+    private Spinner citySpinner;
+    private Button submitBtn, clearBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        initViews();
+        setupSpinner();
+        
+        submitBtn.setOnClickListener(v -> {
+            if (validateForm()) {
+                submitForm();
+            }
+        });
+        
+        clearBtn.setOnClickListener(v -> clearForm());
+    }
+    
+    private void initViews() {
+        nameEdit = findViewById(R.id.nameEdit);
+        emailEdit = findViewById(R.id.emailEdit);
+        phoneEdit = findViewById(R.id.phoneEdit);
+        passwordEdit = findViewById(R.id.passwordEdit);
+        genderGroup = findViewById(R.id.genderGroup);
+        termsCheck = findViewById(R.id.termsCheck);
+        citySpinner = findViewById(R.id.citySpinner);
+        submitBtn = findViewById(R.id.submitBtn);
+        clearBtn = findViewById(R.id.clearBtn);
+    }
+    
+    private void setupSpinner() {
+        String[] cities = {"Select City", "Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, 
+            android.R.layout.simple_spinner_item, cities);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(adapter);
+    }
+    
+    private boolean validateForm() {
+        if (nameEdit.getText().toString().trim().isEmpty()) {
+            nameEdit.setError("Name is required");
+            nameEdit.requestFocus();
+            return false;
+        }
+        
+        String email = emailEdit.getText().toString().trim();
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailEdit.setError("Valid email is required");
+            emailEdit.requestFocus();
+            return false;
+        }
+        
+        String phone = phoneEdit.getText().toString().trim();
+        if (phone.isEmpty() || phone.length() != 10) {
+            phoneEdit.setError("Valid 10-digit phone number required");
+            phoneEdit.requestFocus();
+            return false;
+        }
+        
+        if (passwordEdit.getText().toString().length() < 6) {
+            passwordEdit.setError("Password must be at least 6 characters");
+            passwordEdit.requestFocus();
+            return false;
+        }
+        
+        if (genderGroup.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(this, "Please select gender", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        
+        if (citySpinner.getSelectedItemPosition() == 0) {
+            Toast.makeText(this, "Please select city", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        
+        if (!termsCheck.isChecked()) {
+            Toast.makeText(this, "Please accept terms and conditions", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private void submitForm() {
+        String name = nameEdit.getText().toString();
+        String email = emailEdit.getText().toString();
+        String phone = phoneEdit.getText().toString();
+        
+        RadioButton selectedGender = findViewById(genderGroup.getCheckedRadioButtonId());
+        String gender = selectedGender.getText().toString();
+        
+        String city = citySpinner.getSelectedItem().toString();
+        
+        String message = "Registration Successful!\n\n" +
+                        "Name: " + name + "\n" +
+                        "Email: " + email + "\n" +
+                        "Phone: " + phone + "\n" +
+                        "Gender: " + gender + "\n" +
+                        "City: " + city;
+        
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+    
+    private void clearForm() {
+        nameEdit.setText("");
+        emailEdit.setText("");
+        phoneEdit.setText("");
+        passwordEdit.setText("");
+        genderGroup.clearCheck();
+        citySpinner.setSelection(0);
+        termsCheck.setChecked(false);
+    }
+}</pre>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <div class="code-title">7. Calculator App</div>
+                    <div class="description">Simple calculator with basic operations</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit3code2')">Copy</button>
+                        <pre id="unit3code2">// MainActivity.java
+package com.example.calculator;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.*;
+
+public class MainActivity extends AppCompatActivity {
+    private EditText num1Edit, num2Edit;
+    private TextView resultText;
+    private Button addBtn, subBtn, mulBtn, divBtn, clearBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        initViews();
+        setClickListeners();
+    }
+    
+    private void initViews() {
+        num1Edit = findViewById(R.id.num1Edit);
+        num2Edit = findViewById(R.id.num2Edit);
+        resultText = findViewById(R.id.resultText);
+        addBtn = findViewById(R.id.addBtn);
+        subBtn = findViewById(R.id.subBtn);
+        mulBtn = findViewById(R.id.mulBtn);
+        divBtn = findViewById(R.id.divBtn);
+        clearBtn = findViewById(R.id.clearBtn);
+    }
+    
+    private void setClickListeners() {
+        addBtn.setOnClickListener(v -> performOperation("+"));
+        subBtn.setOnClickListener(v -> performOperation("-"));
+        mulBtn.setOnClickListener(v -> performOperation("*"));
+        divBtn.setOnClickListener(v -> performOperation("/"));
+        clearBtn.setOnClickListener(v -> clearAll());
+    }
+    
+    private void performOperation(String operation) {
+        try {
+            double num1 = Double.parseDouble(num1Edit.getText().toString());
+            double num2 = Double.parseDouble(num2Edit.getText().toString());
+            double result = 0;
+            
+            switch (operation) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                    } else {
+                        Toast.makeText(this, "Cannot divide by zero!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    break;
+            }
+            
+            resultText.setText("Result: " + result);
+            
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Please enter valid numbers", Toast.LENGTH_SHORT).show();
+        }
+    }
+    
+    private void clearAll() {
+        num1Edit.setText("");
+        num2Edit.setText("");
+        resultText.setText("Result: ");
+    }
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 4: Lists & Navigation -->
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>📋 Unit 4: Lists & Navigation</span>
+                <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-content">
+                <div class="code-section">
+                    <div class="code-title">8. ListView Example</div>
+                    <div class="description">ListView with custom adapter</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit4code1')">Copy</button>
+                        <pre id="unit4code1">// MainActivity.java
+package com.example.listview;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class MainActivity extends AppCompatActivity {
+    private ListView listView;
+    private ArrayList<String> items;
+    private ArrayAdapter<String> adapter;
+    private EditText addItemEdit;
+    private Button addBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        initViews();
+        setupListView();
+        
+        addBtn.setOnClickListener(v -> addItem());
+    }
+    
+    private void initViews() {
+        listView = findViewById(R.id.listView);
+        addItemEdit = findViewById(R.id.addItemEdit);
+        addBtn = findViewById(R.id.addBtn);
+    }
+    
+    private void setupListView() {
+        String[] itemArray = {"Apple", "Banana", "Orange", "Mango", "Grapes", 
+                             "Pineapple", "Strawberry", "Watermelon"};
+        items = new ArrayList<>(Arrays.asList(itemArray));
+        
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        listView.setAdapter(adapter);
+        
+        // Item click listener
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedItem = items.get(position);
+            Toast.makeText(this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+        });
+        
+        // Long click to delete
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            String removedItem = items.remove(position);
+            adapter.notifyDataSetChanged();
+            Toast.makeText(this, "Removed: " + removedItem, Toast.LENGTH_SHORT).show();
+            return true;
+        });
+    }
+    
+    private void addItem() {
+        String newItem = addItemEdit.getText().toString().trim();
+        if (!newItem.isEmpty()) {
+            items.add(newItem);
+            adapter.notifyDataSetChanged();
+            addItemEdit.setText("");
+            Toast.makeText(this, "Added: " + newItem, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Please enter item name", Toast.LENGTH_SHORT).show();
+        }
+    }
+}</pre>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <div class="code-title">9. Intent Example - Activity Navigation</div>
+                    <div class="description">Navigation between activities using intents</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit4code2')">Copy</button>
+                        <pre id="unit4code2">// MainActivity.java
+package com.example.intentexample;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.*;
+
+public class MainActivity extends AppCompatActivity {
+    private EditText nameEdit, messageEdit;
+    private Button sendBtn, implicitBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        nameEdit = findViewById(R.id.nameEdit);
+        messageEdit = findViewById(R.id.messageEdit);
+        sendBtn = findViewById(R.id.sendBtn);
+        implicitBtn = findViewById(R.id.implicitBtn);
+        
+        // Explicit Intent
+        sendBtn.setOnClickListener(v -> {
+            String name = nameEdit.getText().toString();
+            String message = messageEdit.getText().toString();
+            
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            intent.putExtra("NAME", name);
+            intent.putExtra("MESSAGE", message);
+            startActivity(intent);
+        });
+        
+        // Implicit Intent
+        implicitBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, "Hello from my app!");
+            startActivity(Intent.createChooser(intent, "Share via"));
+        });
+    }
+}
+
+// SecondActivity.java
+package com.example.intentexample;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.*;
+
+public class SecondActivity extends AppCompatActivity {
+    private TextView displayText;
+    private Button backBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+        
+        displayText = findViewById(R.id.displayText);
+        backBtn = findViewById(R.id.backBtn);
+        
+        // Get data from intent
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("NAME");
+        String message = intent.getStringExtra("MESSAGE");
+        
+        String displayMessage = "Hello " + name + "!\n\nYour message: " + message;
+        displayText.setText(displayMessage);
+        
+        backBtn.setOnClickListener(v -> finish());
+    }
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 5: Advanced Features -->
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🚀 Unit 5: Advanced Features</span>
+                <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-content">
+                <div class="code-section">
+                    <div class="code-title">10. Menu Example</div>
+                    <div class="description">Options menu and context menu</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit5code1')">Copy</button>
+                        <pre id="unit5code1">// MainActivity.java
+package com.example.menuexample;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.*;
+import android.widget.*;
+
+public class MainActivity extends AppCompatActivity {
+    private TextView statusText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        statusText = findViewById(R.id.statusText);
+        
+        // Register for context menu
+        TextView contextText = findViewById(R.id.contextText);
+        registerForContextMenu(contextText);
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_home:
+                statusText.setText("Home selected");
+                return true;
+            case R.id.menu_settings:
+                statusText.setText("Settings selected");
+                return true;
+            case R.id.menu_about:
+                statusText.setText("About selected");
+                return true;
+            case R.id.menu_exit:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.context_menu, menu);
+    }
+    
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.context_copy:
+                statusText.setText("Copy selected");
+                return true;
+            case R.id.context_paste:
+                statusText.setText("Paste selected");
+                return true;
+            case R.id.context_delete:
+                statusText.setText("Delete selected");
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+}</pre>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <div class="code-title">11. SharedPreferences Example</div>
+                    <div class="description">Saving and retrieving user preferences</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit5code2')">Copy</button>
+                        <pre id="unit5code2">// MainActivity.java
+package com.example.sharedpreferences;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.widget.*;
+
+public class MainActivity extends AppCompatActivity {
+    private EditText nameEdit, emailEdit;
+    private CheckBox rememberCheck;
+    private Button saveBtn, loadBtn, clearBtn;
+    private SharedPreferences sharedPreferences;
+    private static final String PREF_NAME = "UserPrefs";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        initViews();
+        sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        
+        saveBtn.setOnClickListener(v -> savePreferences());
+        loadBtn.setOnClickListener(v -> loadPreferences());
+        clearBtn.setOnClickListener(v -> clearPreferences());
+        
+        // Auto-load on startup
+        loadPreferences();
+    }
+    
+    private void initViews() {
+        nameEdit = findViewById(R.id.nameEdit);
+        emailEdit = findViewById(R.id.emailEdit);
+        rememberCheck = findViewById(R.id.rememberCheck);
+        saveBtn = findViewById(R.id.saveBtn);
+        loadBtn = findViewById(R.id.loadBtn);
+        clearBtn = findViewById(R.id.clearBtn);
+    }
+    
+    private void savePreferences() {
+        String name = nameEdit.getText().toString();
+        String email = emailEdit.getText().toString();
+        boolean remember = rememberCheck.isChecked();
+        
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", name);
+        editor.putString("email", email);
+        editor.putBoolean("remember", remember);
+        editor.apply();
+        
+        Toast.makeText(this, "Preferences saved!", Toast.LENGTH_SHORT).show();
+    }
+    
+    private void loadPreferences() {
+        String name = sharedPreferences.getString("name", "");
+        String email = sharedPreferences.getString("email", "");
+        boolean remember = sharedPreferences.getBoolean("remember", false);
+        
+        nameEdit.setText(name);
+        emailEdit.setText(email);
+        rememberCheck.setChecked(remember);
+        
+        Toast.makeText(this, "Preferences loaded!", Toast.LENGTH_SHORT).show();
+    }
+    
+    private void clearPreferences() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        
+        nameEdit.setText("");
+        emailEdit.setText("");
+        rememberCheck.setChecked(false);
+        
+        Toast.makeText(this, "Preferences cleared!", Toast.LENGTH_SHORT).show();
+    }
+}</pre>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <div class="code-title">12. Landscape Mode App</div>
+                    <div class="description">App with landscape orientation and hidden title bar</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('unit5code3')">Copy</button>
+                        <pre id="unit5code3">// MainActivity.java
+package com.example.landscapeapp;
+
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        // Hide title bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+        
+        // Set landscape orientation
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        
+        setContentView(R.layout.activity_main);
+        
+        Toast.makeText(this, "Landscape Mode Active", Toast.LENGTH_LONG).show();
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
+}
+
+// AndroidManifest.xml entry
+&lt;activity
+    android:name=".MainActivity"
+    android:screenOrientation="landscape"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    android:exported="true"&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.MAIN" /&gt;
+        &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎓 Android Development - Units 1-5 Complete</p>
+            <p>MAD practicals for BCA Semester 3 - Ready to use code</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains('active');
+            
+            // Close all accordions
+            document.querySelectorAll('.accordion-header').forEach(h => {
+                h.classList.remove('active');
+                h.nextElementSibling.classList.remove('active');
+            });
+            
+            // Open clicked accordion if it wasn't active
+            if (!isActive) {
+                header.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        function copyCode(codeId) {
+            const codeElement = document.getElementById(codeId);
+            const text = codeElement.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#2196F3';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#4CAF50';
+                }, 2000);
+            }).catch(() => {
+                alert('Failed to copy. Please copy manually.');
+            });
+        }
+    </script>
+</body>
+</html>
